@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { CopyButton } from "../components/CopyButton";
-import { CodeBlock } from "../components/CodeBlock";
+import { useEffect, useState } from "react"
+import { CopyButton } from "../components/CopyButton"
+import { CodeBlock } from "../components/CodeBlock"
 
 interface Release {
-  tag_name: string;
-  published_at: string;
-  html_url: string;
-  assets: { name: string; browser_download_url: string; size: number }[];
+  tag_name: string
+  published_at: string
+  html_url: string
+  assets: { name: string browser_download_url: string size: number }[]
 }
 
-const REPO = "dag12y/saferun";
+const REPO = "dag12y/saferun"
 
 const platforms = [
   {
@@ -45,28 +45,28 @@ install -m 0755 saferun-darwin-arm64 ~/.local/bin/saferun`,
     manual: `# Place binary in a directory on PATH, e.g.:
 # %LOCALAPPDATA%\\SafeRun\\bin\\saferun.exe`,
   },
-];
+]
 
 function fmtBytes(n: number) {
-  if (n < 1024 * 1024) return `${(n / 1024).toFixed(0)} KB`;
-  return `${(n / 1024 / 1024).toFixed(1)} MB`;
+  if (n < 1024 * 1024) return `${(n / 1024).toFixed(0)} KB`
+  return `${(n / 1024 / 1024).toFixed(1)} MB`
 }
 
 export default function Downloads() {
-  const [release, setRelease] = useState<Release | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [release, setRelease] = useState<Release | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     fetch(`https://api.github.com/repos/${REPO}/releases/latest`)
       .then((r) => {
-        if (!r.ok) throw new Error("not found");
-        return r.json();
+        if (!r.ok) throw new Error("not found")
+        return r.json()
       })
       .then(setRelease)
       .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, []);
+      .finally(() => setLoading(false))
+  }, [])
 
   return (
     <div className="max-w-4xl mx-auto px-5 py-16">
@@ -184,10 +184,10 @@ export default function Downloads() {
               </p>
               <div className="grid sm:grid-cols-2 gap-3 mb-6">
                 {platform.arches.map(({ arch, file, label }) => {
-                  const asset = release?.assets.find((a) => a.name === file);
+                  const asset = release?.assets.find((a) => a.name === file)
                   const url =
                     asset?.browser_download_url ||
-                    `https://github.com/${REPO}/releases/latest/download/${file}`;
+                    `https://github.com/${REPO}/releases/latest/download/${file}`
                   return (
                     <a
                       key={arch}
@@ -237,7 +237,7 @@ export default function Downloads() {
                         />
                       </svg>
                     </a>
-                  );
+                  )
                 })}
               </div>
 
@@ -316,5 +316,5 @@ export default function Downloads() {
         </div>
       </div>
     </div>
-  );
+  )
 }
