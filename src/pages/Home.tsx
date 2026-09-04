@@ -1,7 +1,7 @@
-import { Link } from "react-router";
-import { CopyButton } from "../components/CopyButton";
-import { Terminal } from "../components/Terminal";
-import { Architecture } from "../components/Architecture";
+import { Link } from "react-router"
+import { CopyButton } from "../components/CopyButton"
+import { Terminal } from "../components/Terminal"
+import { Architecture } from "../components/Architecture"
 
 function InstallCommand({ cmd }: { cmd: string }) {
   return (
@@ -21,7 +21,7 @@ function InstallCommand({ cmd }: { cmd: string }) {
       </span>
       <CopyButton text={cmd} />
     </div>
-  );
+  )
 }
 
 const pipelineSteps = [
@@ -33,7 +33,7 @@ const pipelineSteps = [
   "Install",
   "Verify",
   "Audit",
-];
+]
 
 const policies = [
   {
@@ -60,7 +60,7 @@ const policies = [
     color: "#f87171",
     desc: "Installation is blocked automatically.",
   },
-];
+]
 
 const features = [
   {
@@ -93,7 +93,7 @@ const features = [
     title: "Audit Logging",
     body: "Every operation is appended to ~/.saferun/audit.jsonl for forensics, compliance, and review.",
   },
-];
+]
 
 const platforms = [
   "Linux x64",
@@ -102,7 +102,7 @@ const platforms = [
   "macOS ARM64",
   "Windows x64",
   "Windows ARM64",
-];
+]
 
 export default function Home() {
   return (
@@ -513,5 +513,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  );
+  )
 }

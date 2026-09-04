@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { CodeBlock } from "../components/CodeBlock";
+import { useState, useEffect } from "react"
+import { CodeBlock } from "../components/CodeBlock"
 
 const NAV = [
   {
@@ -64,16 +64,16 @@ const NAV = [
       { id: "ts-permissions", label: "Permission problems" },
     ],
   },
-];
+]
 
 function Section({
   id,
   title,
   children,
 }: {
-  id: string;
-  title: string;
-  children: React.ReactNode;
+  id: string
+  title: string
+  children: React.ReactNode
 }) {
   return (
     <div
@@ -86,7 +86,7 @@ function Section({
       </h2>
       <div className="prose-docs">{children}</div>
     </div>
-  );
+  )
 }
 
 function P({ children }: { children: React.ReactNode }) {
@@ -94,7 +94,7 @@ function P({ children }: { children: React.ReactNode }) {
     <p className="text-sm leading-7 mb-4" style={{ color: "var(--fg2)" }}>
       {children}
     </p>
-  );
+  )
 }
 
 function H3({ children }: { children: React.ReactNode }) {
@@ -105,21 +105,21 @@ function H3({ children }: { children: React.ReactNode }) {
     >
       {children}
     </h3>
-  );
+  )
 }
 
 function Callout({
   type,
   children,
 }: {
-  type: "info" | "warn" | "note";
-  children: React.ReactNode;
+  type: "info" | "warn" | "note"
+  children: React.ReactNode
 }) {
   const colors = {
     info: "var(--accent)",
     warn: "var(--warn)",
     note: "var(--fg3)",
-  };
+  }
   return (
     <div
       className="flex gap-3 p-4 rounded-lg my-4 text-sm"
@@ -131,7 +131,7 @@ function Callout({
     >
       {children}
     </div>
-  );
+  )
 }
 
 function EnvTable({ rows }: { rows: [string, string, string][] }) {
@@ -188,32 +188,32 @@ function EnvTable({ rows }: { rows: [string, string, string][] }) {
         </tbody>
       </table>
     </div>
-  );
+  )
 }
 
 export default function Docs() {
-  const [active, setActive] = useState("what-is-saferun");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [active, setActive] = useState("what-is-saferun")
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
+          if (e.isIntersecting) setActive(e.target.id)
+        })
       },
       { rootMargin: "-20% 0px -70% 0px", threshold: 0 },
-    );
-    document.querySelectorAll("[id]").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+    )
+    document.querySelectorAll("[id]").forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   const scrollTo = (id: string) => {
-    setSidebarOpen(false);
+    setSidebarOpen(false)
     document
       .getElementById(id)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+      ?.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
 
   return (
     <div className="max-w-6xl mx-auto px-5 py-10 flex gap-10">
@@ -828,5 +828,5 @@ saferun npm install lodash`}
         </Section>
       </div>
     </div>
-  );
+  )
 }
