@@ -1,0 +1,12 @@
+{
+  "title": "SafeRun - Secure npm Package Installation",
+  "language": "en",
+  "description": "SafeRun is a cross-platform security CLI that analyzes npm packages in an isolated sandbox before installation.",
+  "robots": {
+    "index": true
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

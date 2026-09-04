@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import 'tailwindcss';
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+:root {
+  --bg: #f8f9fa;
+  --bg2: #f1f3f5;
+  --card: #ffffff;
+  --card2: #f8f9fa;
+  --border: rgba(0, 0, 0, 0.08);
+  --border2: rgba(0, 0, 0, 0.14);
+  --fg: #0f0f11;
+  --fg2: #4b5563;
+  --fg3: #9ca3af;
+  --accent: #059669;
+  --accent-dim: #d1fae5;
+  --accent-text: #065f46;
+  --warn: #d97706;
+  --danger: #dc2626;
+  --terminal-bg: #0d1117;
+  --terminal-fg: #e6edf3;
+  --terminal-green: #3fb950;
+  --terminal-dim: #8b949e;
+}
+
+.dark {
+  --bg: #0b0b0e;
+  --bg2: #101014;
+  --card: #111116;
+  --card2: #16161c;
+  --border: rgba(255, 255, 255, 0.07);
+  --border2: rgba(255, 255, 255, 0.12);
+  --fg: #f0f0f4;
+  --fg2: #9ca3af;
+  --fg3: #6b7280;
+  --accent: #10d078;
+  --accent-dim: rgba(16, 208, 120, 0.1);
+  --accent-text: #10d078;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --terminal-bg: #080810;
+  --terminal-fg: #e2e8f0;
+  --terminal-green: #10d078;
+  --terminal-dim: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+code, pre, .mono {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* hide scrollbar until hover */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fg3); }
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+
+/* smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* selection color */
+::selection { background: var(--accent); color: #000; }
