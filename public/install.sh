@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-VERSION=${SAFERUN_VERSION:-v1.0.4}
+VERSION=${SAFERUN_VERSION:-v1.0.5}
 export SAFERUN_VERSION="$VERSION"
 
 curl --fail --silent --show-error --location --proto '=https' --tlsv1.2 \
