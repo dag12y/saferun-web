@@ -101,7 +101,7 @@ export default function Home() {
 
             {/* install commands */}
             <div className="flex flex-col gap-3 mb-8 max-w-xl">
-              <InstallCommand cmd="curl -fsSL https://saferun.dev/install.sh | sh" />
+              <InstallCommand cmd="curl -fsSL https://www.saferun.tech/install.sh | sh" />
               <InstallCommand cmd="saferun npm install lodash" />
             </div>
 

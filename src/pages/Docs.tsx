@@ -292,7 +292,7 @@ sandbox/images/node/         — Sandbox Docker image (Node.js + npm)`}
         {/* Getting Started */}
         <Section id="install-linux" title="Installation — Linux">
           <P>Install SafeRun on Linux (amd64) using the curl installer:</P>
-          <CodeBlock lang="bash" code={`curl -fsSL https://saferun.dev/install.sh | sh`} />
+          <CodeBlock lang="bash" code={`curl -fsSL https://www.saferun.tech/install.sh | sh`} />
           <P>The installer places the binary at <code className="mono text-xs px-1.5 py-0.5 rounded" style={{ background: 'var(--card2)', color: 'var(--accent)' }}>~/.local/bin/saferun</code> and verifies the SHA-256 checksum before installation. No root access is required.</P>
           <H3>Manual installation</H3>
           <CodeBlock
@@ -307,14 +307,14 @@ install -m 0755 saferun-linux-amd64 ~/.local/bin/saferun`}
 
         <Section id="install-macos" title="Installation — macOS">
           <P>Install SafeRun on macOS using the curl installer:</P>
-          <CodeBlock lang="bash" code={`curl -fsSL https://saferun.dev/install.sh | sh`} />
+          <CodeBlock lang="bash" code={`curl -fsSL https://www.saferun.tech/install.sh | sh`} />
           <P>Binaries are available for both amd64 (Intel) and arm64 (Apple Silicon). The installer selects the correct architecture automatically.</P>
           <Callout type="warn">Docker Desktop for Mac must be running before using SafeRun.</Callout>
         </Section>
 
         <Section id="install-windows" title="Installation — Windows">
           <P>Install SafeRun on Windows using the PowerShell installer:</P>
-          <CodeBlock lang="powershell" code={`Invoke-Expression (Invoke-WebRequest -Uri https://saferun.dev/install.ps1 -UseBasicParsing).Content`} />
+          <CodeBlock lang="powershell" code={`Invoke-Expression (Invoke-WebRequest -Uri https://www.saferun.tech/install.ps1 -UseBasicParsing).Content`} />
           <P>
             The installer places SafeRun in <code className="mono text-xs px-1 py-0.5 rounded" style={{ background: 'var(--card2)', color: 'var(--accent)' }}>%LOCALAPPDATA%\SafeRun\bin</code> and
             adds it to the user PATH. No administrator rights are required. Open a new PowerShell session after installation.
