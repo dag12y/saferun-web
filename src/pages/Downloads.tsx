@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react"
-import { CopyButton } from "../components/CopyButton"
-import { CodeBlock } from "../components/CodeBlock"
+import { useEffect, useState } from "react";
+import { CopyButton } from "../components/CopyButton";
+import { CodeBlock } from "../components/CodeBlock";
 
 interface Release {
-  tag_name: string
-  published_at: string
-  html_url: string
+  tag_name: string;
+  published_at: string;
+  html_url: string;
   assets: {
-    name: string
-    browser_download_url: string
-    size: number
-    download_count: number
-  }[]
+    name: string;
+    browser_download_url: string;
+    size: number;
+    download_count: number;
+  }[];
 }
 
-const REPO = "dag12y/saferun"
+const REPO = "dag12y/saferun";
 
 const platforms = [
   {
@@ -50,32 +50,39 @@ install -m 0755 saferun-darwin-arm64 ~/.local/bin/saferun`,
     manual: `# Place binary in a directory on PATH, e.g.:
 # %LOCALAPPDATA%\\SafeRun\\bin\\saferun.exe`,
   },
-]
+];
 
 function fmtBytes(n: number) {
-  if (n < 1024 * 1024) return `${(n / 1024).toFixed(0)} KB`
-  return `${(n / 1024 / 1024).toFixed(1)} MB`
+  if (n < 1024 * 1024) return `${(n / 1024).toFixed(0)} KB`;
+  return `${(n / 1024 / 1024).toFixed(1)} MB`;
 }
 
 function fmtDownloads(n: number) {
-  return `${n.toLocaleString("en-US")} download${n === 1 ? "" : "s"}`
+  return `${n.toLocaleString("en-US")} download${n === 1 ? "" : "s"}`;
 }
 
 export default function Downloads() {
-  const [release, setRelease] = useState<Release | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+  const [releases, setReleases] = useState<Release[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch(`https://api.github.com/repos/${REPO}/releases/latest`)
+    fetch(`https://api.github.com/repos/${REPO}/releases?per_page=100`)
       .then((r) => {
-        if (!r.ok) throw new Error("not found")
-        return r.json()
+        if (!r.ok) throw new Error("not found");
+        return r.json();
       })
-      .then(setRelease)
+      .then(setReleases)
       .catch(() => setError(true))
-      .finally(() => setLoading(false))
-  }, [])
+      .finally(() => setLoading(false));
+  }, []);
+
+  const release = releases[0] ?? null;
+  const totalDownloads = releases.reduce(
+    (total, item) =>
+      total + item.assets.reduce((count, asset) => count + asset.download_count, 0),
+    0,
+  );
 
   return (
     <div className="max-w-4xl mx-auto px-5 py-16">
@@ -158,9 +165,30 @@ export default function Downloads() {
       </div>
 
       {release && (
-        <p className="-mt-8 mb-8 text-xs mono" style={{ color: "var(--fg3)" }}>
-          Download counts are reported by GitHub for release binaries.
-        </p>
+        <div className="-mt-8 mb-8 grid sm:grid-cols-2 gap-3">
+          <div
+            className="p-4 rounded-xl border"
+            style={{ background: "var(--card)", borderColor: "var(--border)" }}
+          >
+            <p className="text-xs mono mb-1" style={{ color: "var(--fg3)" }}>
+              ALL RELEASES
+            </p>
+            <p className="text-lg font-bold mono" style={{ color: "var(--fg)" }}>
+              {fmtDownloads(totalDownloads)}
+            </p>
+          </div>
+          <div
+            className="p-4 rounded-xl border"
+            style={{ background: "var(--card)", borderColor: "var(--border)" }}
+          >
+            <p className="text-xs mono mb-1" style={{ color: "var(--fg3)" }}>
+              TRACKING SOURCE
+            </p>
+            <p className="text-sm" style={{ color: "var(--fg2)" }}>
+              GitHub release binaries
+            </p>
+          </div>
+        </div>
       )}
 
       {/* Platform cards */}
@@ -199,10 +227,10 @@ export default function Downloads() {
               </p>
               <div className="grid sm:grid-cols-2 gap-3 mb-6">
                 {platform.arches.map(({ arch, file, label }) => {
-                  const asset = release?.assets.find((a) => a.name === file)
+                  const asset = release?.assets.find((a) => a.name === file);
                   const url =
                     asset?.browser_download_url ||
-                    `https://github.com/${REPO}/releases/latest/download/${file}`
+                    `https://github.com/${REPO}/releases/latest/download/${file}`;
                   return (
                     <a
                       key={arch}
@@ -232,7 +260,8 @@ export default function Downloads() {
                             className="text-xs mt-0.5"
                             style={{ color: "var(--fg3)" }}
                           >
-                            {fmtBytes(asset.size)} · {fmtDownloads(asset.download_count)}
+                            {fmtBytes(asset.size)} ·{" "}
+                            {fmtDownloads(asset.download_count)}
                           </p>
                         )}
                       </div>
@@ -252,7 +281,7 @@ export default function Downloads() {
                         />
                       </svg>
                     </a>
-                  )
+                  );
                 })}
               </div>
 
@@ -331,5 +360,5 @@ export default function Downloads() {
         </div>
       </div>
     </div>
-  )
+  );
 }
