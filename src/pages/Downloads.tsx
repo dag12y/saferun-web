@@ -6,7 +6,12 @@ interface Release {
   tag_name: string
   published_at: string
   html_url: string
-  assets: { name: string browser_download_url: string size: number }[]
+  assets: {
+    name: string
+    browser_download_url: string
+    size: number
+    download_count: number
+  }[]
 }
 
 const REPO = "dag12y/saferun"
@@ -50,6 +55,10 @@ install -m 0755 saferun-darwin-arm64 ~/.local/bin/saferun`,
 function fmtBytes(n: number) {
   if (n < 1024 * 1024) return `${(n / 1024).toFixed(0)} KB`
   return `${(n / 1024 / 1024).toFixed(1)} MB`
+}
+
+function fmtDownloads(n: number) {
+  return `${n.toLocaleString("en-US")} download${n === 1 ? "" : "s"}`
 }
 
 export default function Downloads() {
@@ -148,6 +157,12 @@ export default function Downloads() {
         </a>
       </div>
 
+      {release && (
+        <p className="-mt-8 mb-8 text-xs mono" style={{ color: "var(--fg3)" }}>
+          Download counts are reported by GitHub for release binaries.
+        </p>
+      )}
+
       {/* Platform cards */}
       <div className="flex flex-col gap-8">
         {platforms.map((platform) => (
@@ -217,7 +232,7 @@ export default function Downloads() {
                             className="text-xs mt-0.5"
                             style={{ color: "var(--fg3)" }}
                           >
-                            {fmtBytes(asset.size)}
+                            {fmtBytes(asset.size)} · {fmtDownloads(asset.download_count)}
                           </p>
                         )}
                       </div>
