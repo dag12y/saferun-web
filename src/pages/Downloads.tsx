@@ -80,7 +80,8 @@ export default function Downloads() {
   const release = releases[0] ?? null;
   const totalDownloads = releases.reduce(
     (total, item) =>
-      total + item.assets.reduce((count, asset) => count + asset.download_count, 0),
+      total +
+      item.assets.reduce((count, asset) => count + asset.download_count, 0),
     0,
   );
 
@@ -173,7 +174,10 @@ export default function Downloads() {
             <p className="text-xs mono mb-1" style={{ color: "var(--fg3)" }}>
               ALL RELEASES
             </p>
-            <p className="text-lg font-bold mono" style={{ color: "var(--fg)" }}>
+            <p
+              className="text-lg font-bold mono"
+              style={{ color: "var(--fg)" }}
+            >
               {fmtDownloads(totalDownloads)}
             </p>
           </div>
